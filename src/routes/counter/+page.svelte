@@ -1,6 +1,7 @@
 <script lang="ts">
   import type { Writable } from "svelte/store";
   import type { CounterEntry } from "$lib/types";
+  import { PlusIcon } from "$lib";
   import { localStorageStore, getModalStore, type ModalSettings } from "@skeletonlabs/skeleton";
   import { base } from "$app/paths";
   import { v4 as uuid } from "uuid";
@@ -39,22 +40,8 @@
 {/each}
 
 <button class="btn variant-filled" on:click={() => modalStore.trigger(newCounterModal)}>
-  <span
-    ><svg
-      class="w-6 h-6 text-gray-800 text-white dark:text-black"
-      aria-hidden="true"
-      xmlns="http://www.w3.org/2000/svg"
-      fill="none"
-      viewBox="0 0 18 18"
-    >
-      <path
-        stroke="currentColor"
-        stroke-linecap="round"
-        stroke-linejoin="round"
-        stroke-width="2"
-        d="M9 1v16M1 9h16"
-      />
-    </svg>
+  <span>
+    <PlusIcon />
   </span>
   <span>New Counter</span>
 </button>
