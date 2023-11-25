@@ -1,7 +1,9 @@
 <script lang="ts">
   import "../app.postcss";
-  import { AppShell, AppBar, LightSwitch } from "@skeletonlabs/skeleton";
+  import { AppShell, AppBar, LightSwitch, initializeStores, Modal } from "@skeletonlabs/skeleton";
   import { base } from "$app/paths";
+
+  initializeStores();
 
   const title = "DeltaCount";
 </script>
@@ -9,6 +11,8 @@
 <svelte:head>
   <title>{title}</title>
 </svelte:head>
+
+<Modal />
 
 <!-- App Shell -->
 <AppShell>
