@@ -1,6 +1,7 @@
 <script lang="ts">
   import "../app.postcss";
   import { AppShell, AppBar, LightSwitch } from "@skeletonlabs/skeleton";
+  import { base } from "$app/paths";
 
   const title = "DeltaCount";
 </script>
@@ -15,7 +16,7 @@
     <!-- App Bar -->
     <AppBar>
       <svelte:fragment slot="lead">
-        <a href="/">
+        <a href="{base}/">
           <strong class="text-xl uppercase">{title}</strong>
         </a>
       </svelte:fragment>
