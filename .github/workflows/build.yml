@@ -69,3 +69,9 @@ jobs:
 
       - name: Build
         run: bun run build
+
+      - name: Upload Build
+        uses: actions/upload-artifact@v3
+        with:
+          name: build
+          path: build/
