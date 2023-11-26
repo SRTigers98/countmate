@@ -4,7 +4,10 @@
 
 <section>
   <h1 class="h1 mb-4">
-    <span class="title">DeltaCount</span>
+    <span
+      class="bg-gradient-to-br from-primary-500 via-tertiary-500 to-secondary-500 bg-clip-text text-transparent box-decoration-clone"
+      >DeltaCount</span
+    >
   </h1>
 
   Another counting application that stores your counters
@@ -14,11 +17,3 @@
 <a href="{base}/counter" class="btn bg-gradient-to-br variant-gradient-primary-secondary">
   Get Started
 </a>
-
-<style>
-  .title {
-    @apply bg-clip-text text-transparent box-decoration-clone;
-    @apply bg-gradient-to-br;
-    @apply from-primary-500 via-tertiary-500 to-secondary-500;
-  }
-</style>
