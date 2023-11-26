@@ -31,15 +31,17 @@
   }
 </script>
 
-<h1 class="h1">Counters</h1>
+<h1 class="h1">
+  <span class="text-primary-500">Counter</span>
+</h1>
 
 {#each $countersStore as counter}
-  <a href="{base}/counter/{counter.id}" class="card p-4 counter">
-    <span class="mx-4">{counter.name}</span>
+  <a href="{base}/counter/{counter.id}" class="card card-hover counter variant-glass-tertiary">
+    <section class="p-4 text-secondary-500">{counter.name}</section>
   </a>
 {/each}
 
-<button class="btn variant-filled" on:click={() => modalStore.trigger(newCounterModal)}>
+<button class="btn variant-ghost-primary" on:click={() => modalStore.trigger(newCounterModal)}>
   <span>
     <PlusIcon />
   </span>
