@@ -1,7 +1,7 @@
 <script lang="ts">
   import type { Writable } from "svelte/store";
   import type { CounterEntry } from "$lib/types";
-  import { PlusIcon } from "$lib";
+  import { PlusIcon } from "$lib/icons";
   import { localStorageStore, getModalStore, type ModalSettings } from "@skeletonlabs/skeleton";
   import { base } from "$app/paths";
   import { v4 as uuid } from "uuid";

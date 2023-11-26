@@ -2,7 +2,7 @@
   import "../app.postcss";
   import { AppShell, AppBar, LightSwitch, initializeStores, Modal } from "@skeletonlabs/skeleton";
   import { base } from "$app/paths";
-  import { GitHubIcon } from "$lib";
+  import { GitHubIcon } from "$lib/icons";
 
   initializeStores();
 
