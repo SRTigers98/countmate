@@ -34,7 +34,7 @@
 <h1 class="h1">Counters</h1>
 
 {#each $countersStore as counter}
-  <a href="{base}/counter/{counter.id}" class="card p-4">
+  <a href="{base}/counter/{counter.id}" class="card p-4 counter">
     <span class="mx-4">{counter.name}</span>
   </a>
 {/each}
@@ -45,3 +45,10 @@
   </span>
   <span>New Counter</span>
 </button>
+
+<style>
+  .counter {
+    width: 100%;
+    max-width: 25rem;
+  }
+</style>
