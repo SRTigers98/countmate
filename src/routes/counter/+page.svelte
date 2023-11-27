@@ -2,33 +2,14 @@
   import type { Writable } from "svelte/store";
   import type { CounterEntry } from "$lib/types";
   import { PlusIcon } from "$lib/icons";
-  import { localStorageStore, getModalStore, type ModalSettings } from "@skeletonlabs/skeleton";
+  import { createNewCounterModal } from "$lib/modals";
+  import { localStorageStore, getModalStore } from "@skeletonlabs/skeleton";
   import { base } from "$app/paths";
-  import { v4 as uuid } from "uuid";
 
   const modalStore = getModalStore();
   const countersStore: Writable<CounterEntry[]> = localStorageStore("counters", []);
 
-  const newCounterModal: ModalSettings = {
-    type: "prompt",
-    title: "Create New Counter",
-    body: "Please enter a name for the counter:",
-    valueAttr: { type: "text", minlength: 3, required: true },
-    response: createNewCounter,
-  };
-
-  function createNewCounter(name: string) {
-    if (!name) {
-      return;
-    }
-
-    const counter: CounterEntry = {
-      id: uuid(),
-      name,
-    };
-
-    countersStore.update((counters) => [...counters, counter]);
-  }
+  const newCounterModal = createNewCounterModal(countersStore);
 </script>
 
 <h1 class="h1">

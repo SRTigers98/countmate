@@ -1,20 +1,14 @@
 <script lang="ts">
   import type { Writable } from "svelte/store";
   import type { PageData } from "./$types";
-  import type { CounterEntry, Counter, AtomicCounter } from "$lib/types";
-  import { localStorageStore, getModalStore, type ModalSettings } from "@skeletonlabs/skeleton";
+  import type { CounterEntry, Counter } from "$lib/types";
   import { PlusIcon } from "$lib/icons";
+  import { createAddAtomicCounterModal } from "$lib/modals";
+  import { localStorageStore, getModalStore } from "@skeletonlabs/skeleton";
 
   export let data: PageData;
 
   const modalStore = getModalStore();
-  const addCounterModal: ModalSettings = {
-    type: "prompt",
-    title: "Add Atomic Counter",
-    body: "Please enter a name for the atomic counter:",
-    valueAttr: { type: "text", minlength: 3, required: true },
-    response: addAtomicCounter,
-  };
 
   const countersStore: Writable<CounterEntry[]> = localStorageStore("counters", []);
   let counter = $countersStore.find((e) => e.id === data.id);
@@ -24,22 +18,7 @@
   });
   let totalCount = $counterStore.counters.reduce((prev, curr) => prev + curr.count, 0);
 
-  function addAtomicCounter(name: string) {
-    if (!name) {
-      return;
-    }
-
-    counterStore.update((c) => {
-      const newCounter: AtomicCounter = {
-        name,
-        count: 0,
-      };
-
-      const newCounters = [...c.counters, newCounter];
-
-      return { ...c, counters: newCounters };
-    });
-  }
+  const addCounterModal = createAddAtomicCounterModal(counterStore);
 </script>
 
 <h1 class="h1">
