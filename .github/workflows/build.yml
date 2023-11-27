@@ -32,7 +32,7 @@ jobs:
           key: ${{ runner.os }}-node-${{ hashFiles('bun.lockb') }}
 
       - name: Install
-        if: ${{ !steps.cache-node.outputs.cache-hit }}
+        if: ${{ !steps.cache-node.outputs.cache-hit || github.actor == 'dependabot[bot]' }}
         run: bun install
 
       - name: Check
@@ -64,7 +64,7 @@ jobs:
           key: ${{ runner.os }}-node-${{ hashFiles('bun.lockb') }}
 
       - name: Install
-        if: ${{ !steps.cache-node.outputs.cache-hit }}
+        if: ${{ !steps.cache-node.outputs.cache-hit || github.actor == 'dependabot[bot]' }}
         run: bun install
 
       - name: Build
