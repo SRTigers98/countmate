@@ -4,22 +4,26 @@
 
   const dispatch = createEventDispatcher();
 
-  export let counter: AtomicCounter;
+  export let atomicCounter: AtomicCounter;
 
   function increment() {
-    counter.count++;
-    dispatch("update");
+    dispatch("update", {
+      ...atomicCounter,
+      count: atomicCounter.count + 1,
+    } satisfies AtomicCounter);
   }
 
   function decrement() {
-    counter.count--;
-    dispatch("update");
+    dispatch("update", {
+      ...atomicCounter,
+      count: atomicCounter.count - 1,
+    } satisfies AtomicCounter);
   }
 </script>
 
 <div class="card variant-glass-tertiary">
-  <header class="card-header text-xl"><strong>{counter.name}</strong></header>
-  <section class="p-4 text-5xl">{counter.count}</section>
+  <header class="card-header text-xl"><strong>{atomicCounter.name}</strong></header>
+  <section class="p-4 text-5xl">{atomicCounter.count}</section>
   <footer class="card-footer grid gap-4 grid-cols-2 grid-rows-2">
     <button class="btn variant-filled-primary" on:click={increment}>Inc</button>
     <button class="btn variant-filled-secondary" on:click={decrement}>Dec</button>

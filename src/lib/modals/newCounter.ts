@@ -1,9 +1,9 @@
-import type { CounterEntry } from "$lib/types";
+import type { Counter } from "$lib/types";
 import type { ModalSettings } from "@skeletonlabs/skeleton";
 import type { Writable } from "svelte/store";
 import { v4 as uuid } from "uuid";
 
-export default function (store: Writable<CounterEntry[]>): ModalSettings {
+export default function (add: (counter: Counter) => void): ModalSettings {
   const modal: ModalSettings = {
     type: "prompt",
     title: "Create New Counter",
@@ -17,12 +17,12 @@ export default function (store: Writable<CounterEntry[]>): ModalSettings {
       return;
     }
 
-    const counter: CounterEntry = {
+    const counter: Counter = {
       id: uuid(),
       name,
     };
 
-    store.update((counters) => [...counters, counter]);
+    add(counter);
   }
 
   return modal;

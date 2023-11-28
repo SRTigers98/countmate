@@ -1,10 +1,6 @@
-export type CounterEntry = {
+export type Counter = {
   id: string;
   name: string;
-};
-
-export type Counter = {
-  atomicCounters: AtomicCounter[];
   unit?: string;
 };
 

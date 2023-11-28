@@ -1,15 +1,17 @@
 <script lang="ts">
   import type { Writable } from "svelte/store";
-  import type { CounterEntry } from "$lib/types";
+  import type { Counter } from "$lib/types";
   import { PlusIcon } from "$lib/icons";
   import { createNewCounterModal } from "$lib/modals";
   import { localStorageStore, getModalStore } from "@skeletonlabs/skeleton";
   import { base } from "$app/paths";
 
   const modalStore = getModalStore();
-  const countersStore: Writable<CounterEntry[]> = localStorageStore("counters", []);
+  const countersStore: Writable<Counter[]> = localStorageStore("counters", []);
 
-  const newCounterModal = createNewCounterModal(countersStore);
+  const newCounterModal = createNewCounterModal((counter) => {
+    countersStore.update((c) => [...c, counter]);
+  });
 </script>
 
 <h1 class="h1">

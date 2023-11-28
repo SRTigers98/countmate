@@ -1,8 +1,7 @@
-import type { Counter, AtomicCounter } from "$lib/types";
+import type { AtomicCounter } from "$lib/types";
 import type { ModalSettings } from "@skeletonlabs/skeleton";
-import type { Writable } from "svelte/store";
 
-export default function (store: Writable<Counter>): ModalSettings {
+export default function (add: (atomicCounter: AtomicCounter) => void): ModalSettings {
   const modal: ModalSettings = {
     type: "prompt",
     title: "Add Atomic Counter",
@@ -16,16 +15,12 @@ export default function (store: Writable<Counter>): ModalSettings {
       return;
     }
 
-    store.update((c) => {
-      const newCounter: AtomicCounter = {
-        name,
-        count: 0,
-      };
+    const atomicCounter: AtomicCounter = {
+      name,
+      count: 0,
+    };
 
-      const newCounters = [...c.atomicCounters, newCounter];
-
-      return { ...c, atomicCounters: newCounters };
-    });
+    add(atomicCounter);
   }
 
   return modal;
