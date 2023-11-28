@@ -1,6 +1,5 @@
 import type { Counter } from "$lib/types";
 import type { ModalSettings } from "@skeletonlabs/skeleton";
-import type { Writable } from "svelte/store";
 import { v4 as uuid } from "uuid";
 
 export default function (add: (counter: Counter) => void): ModalSettings {
