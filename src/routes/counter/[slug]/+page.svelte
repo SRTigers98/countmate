@@ -31,9 +31,14 @@
 
 {#each $counterStore.counters as c}
   <div class="card variant-glass-tertiary">
-    <header class="card-header"><strong>{c.name}</strong></header>
-    <section class="p-4">(content)</section>
-    <footer class="card-footer">(footer)</footer>
+    <header class="card-header text-xl"><strong>{c.name}</strong></header>
+    <section class="p-4 text-5xl">{c.count}</section>
+    <footer class="card-footer grid gap-4 grid-cols-2 grid-rows-2">
+      <button class="btn variant-filled-primary">Inc</button>
+      <button class="btn variant-filled-secondary">Dec</button>
+      <button class="btn variant-filled-tertiary">Edit</button>
+      <button class="btn variant-filled-error">Delete</button>
+    </footer>
   </div>
 {/each}
 
