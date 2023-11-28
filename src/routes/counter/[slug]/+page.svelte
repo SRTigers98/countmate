@@ -4,42 +4,34 @@
   import type { CounterEntry, Counter } from "$lib/types";
   import { PlusIcon } from "$lib/icons";
   import { createAddAtomicCounterModal } from "$lib/modals";
+  import { AtomicCounter } from "$lib/components";
   import { localStorageStore, getModalStore } from "@skeletonlabs/skeleton";
 
   export let data: PageData;
 
   const modalStore = getModalStore();
 
-  const countersStore: Writable<CounterEntry[]> = localStorageStore("counters", []);
-  let counter = $countersStore.find((e) => e.id === data.id);
+  const counters: Writable<CounterEntry[]> = localStorageStore("counters", []);
+  let counterEntry = $counters.find((e) => e.id === data.id);
 
-  const counterStore: Writable<Counter> = localStorageStore(`counter-${counter?.id}`, {
-    counters: [],
+  const counter: Writable<Counter> = localStorageStore(`counter-${counterEntry?.id}`, {
+    atomicCounters: [],
   });
-  let totalCount = $counterStore.counters.reduce((prev, curr) => prev + curr.count, 0);
+  let totalCount = $counter.atomicCounters?.reduce((prev, curr) => prev + curr.count, 0);
 
-  const addCounterModal = createAddAtomicCounterModal(counterStore);
+  const addCounterModal = createAddAtomicCounterModal(counter);
 </script>
 
 <h1 class="h1">
-  <span class="text-primary-500">Counter {counter?.name || ""}</span>
+  <span class="text-primary-500">Counter {counterEntry?.name || ""}</span>
 </h1>
 
 <div class="card variant-glass-primary">
   <section class="p-4">Total Count: <strong>{totalCount}</strong></section>
 </div>
 
-{#each $counterStore.counters as c}
-  <div class="card variant-glass-tertiary">
-    <header class="card-header text-xl"><strong>{c.name}</strong></header>
-    <section class="p-4 text-5xl">{c.count}</section>
-    <footer class="card-footer grid gap-4 grid-cols-2 grid-rows-2">
-      <button class="btn variant-filled-primary">Inc</button>
-      <button class="btn variant-filled-secondary">Dec</button>
-      <button class="btn variant-filled-tertiary">Edit</button>
-      <button class="btn variant-filled-error">Delete</button>
-    </footer>
-  </div>
+{#each $counter.atomicCounters as atomicCounter}
+  <AtomicCounter counter={atomicCounter} on:update={() => counter.update((c) => c)} />
 {/each}
 
 <button class="btn variant-ghost-primary" on:click={() => modalStore.trigger(addCounterModal)}>

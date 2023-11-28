@@ -22,9 +22,9 @@ export default function (store: Writable<Counter>): ModalSettings {
         count: 0,
       };
 
-      const newCounters = [...c.counters, newCounter];
+      const newCounters = [...c.atomicCounters, newCounter];
 
-      return { ...c, counters: newCounters };
+      return { ...c, atomicCounters: newCounters };
     });
   }
 

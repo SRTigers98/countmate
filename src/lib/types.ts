@@ -4,7 +4,7 @@ export type CounterEntry = {
 };
 
 export type Counter = {
-  counters: AtomicCounter[];
+  atomicCounters: AtomicCounter[];
   unit?: string;
 };
 
