@@ -44,3 +44,19 @@ function createModal(
 
   return modal;
 }
+
+export function createDeleteAtomicCounterModal(
+  atomicCounter: AtomicCounter,
+  remove: (id: string) => void
+): ModalSettings {
+  return {
+    type: "confirm",
+    title: "Delete Atomic Counter",
+    body: `Are you sure you want to delete the atomic counter ${atomicCounter.name}?`,
+    response: (confirmation) => {
+      if (confirmation) {
+        remove(atomicCounter.id);
+      }
+    },
+  };
+}

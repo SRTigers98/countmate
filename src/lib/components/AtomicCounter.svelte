@@ -1,6 +1,6 @@
 <script lang="ts">
   import type { AtomicCounter } from "$lib/types";
-  import { createEditAtomicCounterModal } from "$lib/modals";
+  import { createDeleteAtomicCounterModal, createEditAtomicCounterModal } from "$lib/modals";
   import { getModalStore } from "@skeletonlabs/skeleton";
   import { createEventDispatcher } from "svelte";
 
@@ -10,6 +10,7 @@
   export let atomicCounter: AtomicCounter;
 
   $: editModal = createEditAtomicCounterModal(atomicCounter, (c) => dispatch("update", c));
+  $: deleteModal = createDeleteAtomicCounterModal(atomicCounter, (id) => dispatch("delete", id));
 
   function increment() {
     dispatch("update", {
@@ -39,7 +40,7 @@
     <button class="btn variant-filled-tertiary" on:click={() => modalStore.trigger(editModal)}
       >Edit</button
     >
-    <button class="btn variant-filled-error" on:click={() => dispatch("delete", atomicCounter.name)}
+    <button class="btn variant-filled-error" on:click={() => modalStore.trigger(deleteModal)}
       >Delete</button
     >
   </footer>

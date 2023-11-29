@@ -29,6 +29,10 @@
       counters.map((c) => (c.id === event.detail.id ? event.detail : c))
     );
   }
+
+  function deleteAtomicCounter(event: CustomEvent<string>) {
+    atomicCountersStore.update((counters) => counters.filter((c) => c.id !== event.detail));
+  }
 </script>
 
 <h1 class="h1">
@@ -40,7 +44,11 @@
 </div>
 
 {#each $atomicCountersStore as atomicCounter}
-  <AtomicCounterComponent {atomicCounter} on:update={updateAtomicCounter} />
+  <AtomicCounterComponent
+    {atomicCounter}
+    on:update={updateAtomicCounter}
+    on:delete={deleteAtomicCounter}
+  />
 {/each}
 
 <button class="btn variant-ghost-primary" on:click={() => modalStore.trigger(addCounterModal)}>
