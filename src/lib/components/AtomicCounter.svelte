@@ -19,6 +19,10 @@
   }
 
   function decrement() {
+    if (atomicCounter.count == 0) {
+      return;
+    }
+
     dispatch("update", {
       ...atomicCounter,
       count: atomicCounter.count - 1,
