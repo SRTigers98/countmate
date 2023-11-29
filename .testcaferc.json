@@ -1,4 +1,5 @@
 {
   "src": "test/",
-  "browsers": "chrome:headless"
+  "browsers": "chrome:headless",
+  "appCommand": "bun --bun run dev"
 }
