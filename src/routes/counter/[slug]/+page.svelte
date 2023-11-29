@@ -4,7 +4,7 @@
   import type { Counter, AtomicCounter } from "$lib/types";
   import { PlusIcon } from "$lib/icons";
   import { createAddAtomicCounterModal } from "$lib/modals";
-  import { AtomicCounter as AtomicCounterComponent } from "$lib/components";
+  import { AtomicCounterCard } from "$lib/components";
   import { localStorageStore, getModalStore } from "@skeletonlabs/skeleton";
 
   export let data: PageData;
@@ -44,7 +44,7 @@
 </div>
 
 {#each $atomicCountersStore as atomicCounter}
-  <AtomicCounterComponent
+  <AtomicCounterCard
     {atomicCounter}
     on:update={updateAtomicCounter}
     on:delete={deleteAtomicCounter}
