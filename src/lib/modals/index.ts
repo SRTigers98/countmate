@@ -1,2 +1,2 @@
-export { default as createNewCounterModal } from "./newCounter";
+export * from "./counter";
 export * from "./atomicCounter";

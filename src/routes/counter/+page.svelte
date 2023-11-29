@@ -2,9 +2,9 @@
   import type { Writable } from "svelte/store";
   import type { Counter } from "$lib/types";
   import { PlusIcon } from "$lib/icons";
+  import { CounterCard } from "$lib/components";
   import { createNewCounterModal } from "$lib/modals";
   import { localStorageStore, getModalStore } from "@skeletonlabs/skeleton";
-  import { base } from "$app/paths";
 
   const modalStore = getModalStore();
   const countersStore: Writable<Counter[]> = localStorageStore("counters", []);
@@ -12,6 +12,17 @@
   const newCounterModal = createNewCounterModal((counter) => {
     countersStore.update((c) => [...c, counter]);
   });
+
+  function updateCounter(event: CustomEvent<Counter>) {
+    countersStore.update((counters) =>
+      counters.map((c) => (c.id === event.detail.id ? event.detail : c))
+    );
+  }
+
+  function deleteCounter(event: CustomEvent<string>) {
+    countersStore.update((counters) => counters.filter((c) => c.id !== event.detail));
+    localStorage.removeItem(`atomic-counters-${event.detail}`);
+  }
 </script>
 
 <h1 class="h1">
@@ -19,9 +30,7 @@
 </h1>
 
 {#each $countersStore as counter}
-  <a href="{base}/counter/{counter.id}" class="card card-hover counter variant-glass-tertiary">
-    <section class="p-4 text-secondary-500">{counter.name}</section>
-  </a>
+  <CounterCard {counter} on:update={updateCounter} on:delete={deleteCounter} />
 {/each}
 
 <button class="btn variant-ghost-primary" on:click={() => modalStore.trigger(newCounterModal)}>
@@ -30,10 +39,3 @@
   </span>
   <span>New Counter</span>
 </button>
-
-<style>
-  .counter {
-    width: 100%;
-    max-width: 25rem;
-  }
-</style>
