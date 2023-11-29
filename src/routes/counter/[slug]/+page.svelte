@@ -26,7 +26,7 @@
 
   function updateAtomicCounter(event: CustomEvent<AtomicCounter>) {
     atomicCountersStore.update((counters) =>
-      counters.map((c) => (c.name === event.detail.name ? event.detail : c))
+      counters.map((c) => (c.id === event.detail.id ? event.detail : c))
     );
   }
 </script>

@@ -5,6 +5,7 @@ export type Counter = {
 };
 
 export type AtomicCounter = {
+  id: string;
   name: string;
   value?: number;
   count: number;
