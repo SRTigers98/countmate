@@ -51,9 +51,13 @@
   />
 {/each}
 
-<button class="btn variant-ghost-primary" on:click={() => modalStore.trigger(addCounterModal)}>
-  <span>
-    <PlusIcon />
-  </span>
-  <span>Add Counter</span>
-</button>
+<section class="grid gap-4 grid-rows-2">
+  <button class="btn variant-ghost-primary" on:click={() => modalStore.trigger(addCounterModal)}>
+    <span>
+      <PlusIcon />
+    </span>
+    <span>Add Counter</span>
+  </button>
+
+  <button class="btn variant-ghost-secondary" on:click={() => history.back()}>Back</button>
+</section>
