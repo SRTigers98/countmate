@@ -6,9 +6,10 @@ module.exports = {
     "plugin:@typescript-eslint/recommended",
     "plugin:svelte/recommended",
     "prettier",
+    "plugin:testcafe/recommended",
   ],
   parser: "@typescript-eslint/parser",
-  plugins: ["@typescript-eslint"],
+  plugins: ["@typescript-eslint", "testcafe"],
   parserOptions: {
     sourceType: "module",
     ecmaVersion: 2020,
