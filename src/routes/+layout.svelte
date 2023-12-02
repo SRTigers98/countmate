@@ -2,6 +2,7 @@
   import "../app.postcss";
   import { AppShell, AppBar, LightSwitch, initializeStores, Modal } from "@skeletonlabs/skeleton";
   import { base } from "$app/paths";
+  import { version } from "$app/environment";
   import { GitHubIcon } from "$lib/icons";
 
   initializeStores();
@@ -44,4 +45,14 @@
       <slot />
     </div>
   </div>
+  <svelte:fragment slot="footer">
+    <AppBar>
+      <svelte:fragment slot="lead"><div></div></svelte:fragment>
+      <svelte:fragment slot="trail">
+        <span class="chip bg-gradient-to-br variant-gradient-secondary-primary cursor-default"
+          >{version}</span
+        >
+      </svelte:fragment>
+    </AppBar>
+  </svelte:fragment>
 </AppShell>
