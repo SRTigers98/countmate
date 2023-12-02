@@ -20,23 +20,27 @@ function createModal(
   atomicCounter: AtomicCounter | undefined = undefined
 ): ModalSettings {
   const modal: ModalSettings = {
-    type: "prompt",
+    type: "component",
+    component: "atomicCounter",
     title: `${atomicCounter?.name ? "Edit" : "Add"} Atomic Counter`,
-    body: "Please enter a name for the atomic counter:",
-    value: atomicCounter?.name || "",
-    valueAttr: { type: "text", minlength: 3, required: true },
+    value: {
+      name: atomicCounter?.name,
+      value: atomicCounter?.value,
+    },
+    body: "Please enter details for the atomic counter:",
     response: updateAtomicCounter,
   };
 
-  function updateAtomicCounter(name: string) {
-    if (!name) {
+  function updateAtomicCounter(data: { name: string; value?: number }) {
+    if (!data) {
       return;
     }
 
     const newAtomicCounter: AtomicCounter = {
       id: atomicCounter?.id || uuid(),
-      name,
+      name: data.name,
       count: atomicCounter?.count || 0,
+      value: data.value,
     };
 
     update(newAtomicCounter);

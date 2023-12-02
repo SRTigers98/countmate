@@ -33,7 +33,13 @@
 
 <div class="card variant-glass-tertiary">
   <header class="card-header text-xl"><strong>{atomicCounter.name}</strong></header>
-  <section class="p-4 text-5xl">{atomicCounter.count}</section>
+  <section class="p-4 text-5xl">
+    {#if atomicCounter.value}
+      {atomicCounter.count} / {atomicCounter.count * atomicCounter.value}
+    {:else}
+      {atomicCounter.count}
+    {/if}
+  </section>
   <footer class="card-footer grid gap-4 grid-cols-2 grid-rows-2">
     <button class="btn variant-filled-primary" on:click={increment}>Inc</button>
     <button class="btn variant-filled-secondary" on:click={decrement}>Dec</button>

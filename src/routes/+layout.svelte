@@ -1,14 +1,26 @@
 <script lang="ts">
   import "../app.postcss";
-  import { AppShell, AppBar, LightSwitch, initializeStores, Modal } from "@skeletonlabs/skeleton";
+  import {
+    AppShell,
+    AppBar,
+    LightSwitch,
+    initializeStores,
+    Modal,
+    type ModalComponent,
+  } from "@skeletonlabs/skeleton";
   import { base } from "$app/paths";
   import { version } from "$app/environment";
   import { GitHubIcon } from "$lib/icons";
   import { ScreenWakeLock } from "$lib/components";
+  import { AtomicCounterModal } from "$lib/modals";
 
   initializeStores();
 
   const title = "DeltaCount";
+
+  const modalRegistry: Record<string, ModalComponent> = {
+    atomicCounter: { ref: AtomicCounterModal },
+  };
 </script>
 
 <svelte:head>
@@ -17,7 +29,7 @@
 
 <ScreenWakeLock />
 
-<Modal />
+<Modal components={modalRegistry} />
 
 <!-- App Shell -->
 <AppShell>
