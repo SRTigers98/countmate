@@ -8,6 +8,7 @@
   const modalStore = getModalStore();
 
   export let atomicCounter: AtomicCounter;
+  export let unit: string | undefined = undefined;
 
   $: editModal = createEditAtomicCounterModal(atomicCounter, (c) => dispatch("update", c));
   $: deleteModal = createDeleteAtomicCounterModal(atomicCounter, (id) => dispatch("delete", id));
@@ -35,7 +36,7 @@
   <header class="card-header text-xl"><strong>{atomicCounter.name}</strong></header>
   <section class="p-4 text-5xl">
     {#if atomicCounter.value}
-      {atomicCounter.count} / {atomicCounter.count * atomicCounter.value}
+      {atomicCounter.count} / {atomicCounter.count * atomicCounter.value}{unit || ""}
     {:else}
       {atomicCounter.count}
     {/if}

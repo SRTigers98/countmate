@@ -50,7 +50,7 @@
 
   {#if $atomicCountersStore.find((c) => !!c.value)}
     <div class="card variant-glass-secondary">
-      <section class="p-4">Total Value: <strong>{totalValue}</strong></section>
+      <section class="p-4">Total Value: <strong>{totalValue}{counter?.unit || ""}</strong></section>
     </div>
   {/if}
 </section>
@@ -58,6 +58,7 @@
 {#each $atomicCountersStore as atomicCounter}
   <AtomicCounterCard
     {atomicCounter}
+    unit={counter?.unit}
     on:update={updateAtomicCounter}
     on:delete={deleteAtomicCounter}
   />
