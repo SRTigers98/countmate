@@ -4,6 +4,7 @@
   import { base } from "$app/paths";
   import { version } from "$app/environment";
   import { GitHubIcon } from "$lib/icons";
+  import { ScreenWakeLock } from "$lib/components";
 
   initializeStores();
 
@@ -13,6 +14,8 @@
 <svelte:head>
   <title>{title}</title>
 </svelte:head>
+
+<ScreenWakeLock />
 
 <Modal />
 
