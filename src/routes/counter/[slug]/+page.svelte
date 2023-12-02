@@ -23,6 +23,7 @@
     (prev, curr) => prev + curr.count * (curr.value || 0),
     0
   );
+  $: hasValues = !!$atomicCountersStore.find((c) => !!c.value);
 
   const addCounterModal = createAddAtomicCounterModal((atomicCounter) => {
     atomicCountersStore.update((c) => [...c, atomicCounter]);
@@ -43,12 +44,12 @@
   <span class="text-primary-500">Counter {counter?.name || ""}</span>
 </h1>
 
-<section class="grid gap-4 grid-cols-2">
+<section class="grid gap-4 {hasValues ? 'grid-cols-2' : 'grid-cols-1'}">
   <div class="card variant-glass-primary">
     <section class="p-4">Total Count: <strong>{totalCount}</strong></section>
   </div>
 
-  {#if $atomicCountersStore.find((c) => !!c.value)}
+  {#if hasValues}
     <div class="card variant-glass-secondary">
       <section class="p-4">Total Value: <strong>{totalValue}{counter?.unit || ""}</strong></section>
     </div>
