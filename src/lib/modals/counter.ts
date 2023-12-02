@@ -18,22 +18,26 @@ function createModal(
   counter: Counter | undefined = undefined
 ): ModalSettings {
   const modal: ModalSettings = {
-    type: "prompt",
+    type: "component",
+    component: "counter",
     title: `${counter ? "Edit" : "Create New"} Counter`,
-    body: "Please enter a name for the counter:",
-    value: counter?.name || "",
-    valueAttr: { type: "text", minlength: 3, required: true },
+    body: "Please enter details for the counter:",
+    value: {
+      name: counter?.name,
+      unit: counter?.unit,
+    },
     response: updateCounter,
   };
 
-  function updateCounter(name: string) {
-    if (!name) {
+  function updateCounter(data: { name: string; unit?: string }) {
+    if (!data) {
       return;
     }
 
     const newCounter: Counter = {
       id: counter?.id || uuid(),
-      name,
+      name: data.name,
+      unit: data.unit,
     };
 
     update(newCounter);

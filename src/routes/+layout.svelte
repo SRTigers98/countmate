@@ -12,7 +12,7 @@
   import { version } from "$app/environment";
   import { GitHubIcon } from "$lib/icons";
   import { ScreenWakeLock } from "$lib/components";
-  import { AtomicCounterModal } from "$lib/modals";
+  import { AtomicCounterModal, CounterModal } from "$lib/modals";
 
   initializeStores();
 
@@ -20,6 +20,7 @@
 
   const modalRegistry: Record<string, ModalComponent> = {
     atomicCounter: { ref: AtomicCounterModal },
+    counter: { ref: CounterModal },
   };
 </script>
 
