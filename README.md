@@ -10,7 +10,11 @@ Another counting application that stores your counters **locally in the browser*
 
 - Create counters that are stored in the local storage of your browser
 - Every counter can have multiple _atomic counter_ with separate names
-- The sum of all _atomic counters_ will be displayed at the top of the counter
+- The sum of all _atomic counters_ is displayed at the top of the counter
+- For every _atomic counter_ a value can be defined (shown as **count \* value**)
+- The sum of all values is displayed at the top of the counter
+- For every counter an unit can be defined
+- If an unit is present the unit is shown after the values
 
 ## :rocket: Get Started
 
