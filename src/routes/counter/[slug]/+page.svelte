@@ -25,6 +25,11 @@
   );
   $: hasValues = !!$atomicCountersStore.find((c) => !!c.value);
 
+  $: downloadName = `${counter?.name.replaceAll(" ", "_")}.csv`;
+  $: csvContent = `data:text/csv;charset=utf-8,name,count,value\n${$atomicCountersStore
+    .map((c) => `${c.name},${c.count},${c.value || ""}`)
+    .join("\n")}`;
+
   const addCounterModal = createAddAtomicCounterModal((atomicCounter) => {
     atomicCountersStore.update((c) => [...c, atomicCounter]);
   });
@@ -65,7 +70,7 @@
   />
 {/each}
 
-<section class="grid gap-4 grid-rows-2">
+<section class="grid gap-4 grid-rows-3">
   <button class="btn variant-ghost-primary" on:click={() => modalStore.trigger(addCounterModal)}>
     <span>
       <PlusIcon />
@@ -74,4 +79,8 @@
   </button>
 
   <button class="btn variant-ghost-secondary" on:click={() => history.back()}>Back</button>
+
+  <a class="btn variant-ghost-success" href={encodeURI(csvContent)} download={downloadName}
+    >Export Data</a
+  >
 </section>
