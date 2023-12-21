@@ -37,7 +37,7 @@
     "typescript": "^5.0.0",
     "uuid": "^9.0.1",
     "vite": "^4.4.2",
-    "vite-plugin-tailwind-purgecss": "0.1.4"
+    "vite-plugin-tailwind-purgecss": "0.2.0"
   },
   "type": "module"
 }
